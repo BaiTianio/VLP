@@ -1,0 +1,15 @@
+..\output\dma.o: ..\SYSTEM\dma.c
+..\output\dma.o: ..\SYSTEM\dma.h
+..\output\dma.o: ..\CMSIS\stm32f10x.h
+..\output\dma.o: ..\CMSIS\core_cm3.h
+..\output\dma.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\dma.o: ..\CMSIS\system_stm32f10x.h
+..\output\dma.o: ..\User\stm32f10x_conf.h
+..\output\dma.o: ..\FWLIB\stm32f10x_adc.h
+..\output\dma.o: ..\CMSIS\stm32f10x.h
+..\output\dma.o: ..\FWLIB\stm32f10x_dma.h
+..\output\dma.o: ..\FWLIB\stm32f10x_exti.h
+..\output\dma.o: ..\FWLIB\stm32f10x_gpio.h
+..\output\dma.o: ..\FWLIB\stm32f10x_rcc.h
+..\output\dma.o: ..\FWLIB\stm32f10x_usart.h
+..\output\dma.o: ..\FWLIB\misc.h
