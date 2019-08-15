@@ -54,7 +54,7 @@ def plot_32PD(angle):
     plt.legend()
 
 #%%   
-angle=60   
+angle=70   
 sns.set(style="whitegrid")
 fig1=plt.figure()    
 plot_8PD(angle,1)

@@ -7,28 +7,29 @@
 #include "exti.h"
 
 void Get_ADC(u8 *data_storge);//获取ADC信息，并保存到Data_storge	
-u8 Data_storge[72]={0};//数据存储
+int *Data_storge=NULL;
+Data_storge=(int *)malloc(2000 * sizeof(u16));//数据存储
+memset(Data_storge,0,2000 * sizeof(u16))
 int main(void)
 {	
 //	int i;//计数用
 
-	uart_init(1500000);
+	uart_init(115200);
 	delay_init();
 	Adc_Init(); 
 	gpio_Init();
-	dma_Init(DMA1_Channel4,(uint32_t)&USART1->DR,(uint32_t)Data_storge,(uint32_t)72);
-	exti_init();
+	// dma_Init(DMA1_Channel4,(uint32_t)&USART1->DR,(uint32_t)Data_storge,(uint32_t)72);
+	// exti_init();
 	
-	Get_ADC(Data_storge);//采集数据
-	dma_usart_Start(DMA1_Channel4, 72);//开启DMA传送
+	// Get_ADC(Data_storge);//采集数据
+	// dma_usart_Start(DMA1_Channel4, 72);//开启DMA传送
 	while(1)
 	{
 		Get_ADC(Data_storge);//采集数据
-		
-		while(((DMA1->ISR)&(0x01<<13))==0);//等待DMA传送完成
-		DMA1->IFCR |=0x01<<13;//清除发送完成标志
-		dma_usart_Start(DMA1_Channel4, 72);//开启DMA传送
-		EXTI->IMR |=EXTI_Line12;//开启外部中断
+		// while(((DMA1->ISR)&(0x01<<13))==0);//等待DMA传送完成
+		// DMA1->IFCR |=0x01<<13;//清除发送完成标志
+		// dma_usart_Start(DMA1_Channel4, 72);//开启DMA传送
+		// EXTI->IMR |=EXTI_Line12;//开启外部中断
 	}
 }
 
