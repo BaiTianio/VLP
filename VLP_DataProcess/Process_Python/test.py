@@ -10,7 +10,11 @@ from scipy import poly1d
 import numpy as np
 import matplotlib.pyplot as plt
 
-p=poly1d([-1,-200,1000])
-x=np.arange(0,31)
-plt.plot(x,p(x))
+ang=np.append(np.arange(40,0,-2.5),np.arange(0,40,2.5))
+radian=ang/180*np.pi
+a=np.sin(radian)
+b=np.cos(radian)
+y=b-2*a
+y[y<0]=0
+plt.plot(y)
 

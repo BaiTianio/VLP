@@ -22,7 +22,7 @@ def gain_adjust(in_data):
     in_data[:,27]=in_data[:,27]*0.44#A3P6
     return in_data
 def read_data(angle):
-    path="/home/bxt/VLP/VLP_DataProcess/Data/data_csv/"
+    path="../Data/data_csv/"
     file_list=os.listdir(path)
     csv_list=list(filter(lambda x:(x[-4:]==".csv" and x[5:7]==str(angle)),file_list))
     data=[0,0,0]
@@ -43,15 +43,20 @@ def plot_8PD(angle,time):
     for i in range(4):
         max_num=column_max(data[:,index+i])
         plt.plot(max_num,label='PDarray='+str(i))
+    plt.title("angle={}".format(angle))  
     plt.legend()
 #        plt.ylim(100,180)
 def plot_32PD(angle):
     data=read_data(angle)
     for i in range(3):
         plt.plot(column_max(data[i]),label='times='+str(i))  
+    plt.title("angle={}".format(angle))    
     plt.legend()
+
+#%%   
+angle=60   
 sns.set(style="whitegrid")
 fig1=plt.figure()    
-plot_8PD(64,2)
+plot_8PD(angle,1)
 fig2=plt.figure()
-plot_32PD(64)
+plot_32PD(angle)

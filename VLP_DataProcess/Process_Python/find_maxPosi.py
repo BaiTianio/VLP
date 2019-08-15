@@ -24,6 +24,7 @@ def plot_32maxposi(angle):
     for i in range(3):
         max_loc=column_maxposi(data[i])
         plt.plot(max_loc,label='time='+str(i))
+        plt.title(("Angle={}".format(angle)))
         plt.legend()
         plt.xlim(0,31)
 #        plt.ylim(100,180)
@@ -34,8 +35,9 @@ def plot_8maxposi(angle,time):
     for i in range(4):
         max_loc=column_maxposi(data[:,index+i])
         plt.plot(max_loc,label='PDarray='+str(i))
+        plt.title(("times={}".format(time)))
         plt.legend()
-#        plt.ylim(100,180)
+        plt.ylim(50,200)
         
 def plot_1PDmaxPosi(PD_num):
     max_loc=np.int64([]) 
@@ -48,16 +50,26 @@ def plot_1PDmaxPosi(PD_num):
     plt.xlim(40,90)
     plt.ylim(100,180)
     plt.legend()
-
-#plot_1PDmaxPosi(16)
-#plot_1PDmaxPosi(17) 
-#plot_1PDmaxPosi(18)
-#plot_1PDmaxPosi(19)
-#plot_1PDmaxPosi(20)      
+#%%
+plot_1PDmaxPosi(21)
+plot_1PDmaxPosi(22) 
+plot_1PDmaxPosi(23)
+plot_1PDmaxPosi(24)
+plot_1PDmaxPosi(25)  
+    
+#%% 
+angle=68
 fig=plt.figure()
+plt.suptitle(("Angle={}".format(angle)))
 plt.subplot(131)
-plot_8maxposi(70,0)
+plot_8maxposi(angle,0)
 plt.subplot(132)
-plot_8maxposi(70,1)
+plot_8maxposi(angle,1)
 plt.subplot(133)
-plot_8maxposi(70,2)
+plot_8maxposi(angle,2)
+#%%
+fig=plt.figure()
+plt.subplot(121)
+plot_32maxposi(60)
+plt.subplot(122)
+plot_32maxposi(62)
