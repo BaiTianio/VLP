@@ -1,6 +1,6 @@
-# VLP£¨visible light positioning£©
-²Ö¿âÎÄ¼þÄ¿Â¼£º
-1.Document£ºÎÄµµ
-2.DataProcess£ºÊý¾Ý´¦Àí£¬°üÀ¨MATLABºÍPython
-3.Receiver£º½ÓÊÕÆ÷Éè¼Æ£¬°üÀ¨SWÄ£ÐÍÉè¼Æ¡¢ADµçÂ·Éè¼ÆºÍSTM32³ÌÐòÉè¼Æ
-4.Transmitter£º·¢ËÍ¶ËÉè¼Æ£¬°üÀ¨µçÂ·Éè¼ÆºÍ³ÌÐòÉè¼Æ
+# VLPï¼ˆvisible light positioningï¼‰
+ä»“åº“æ–‡ä»¶ç›®å½•ï¼š  
+1.Documentï¼šæ–‡æ¡£ ;  
+2.DataProcessï¼šæ•°æ®å¤„ç†ï¼ŒåŒ…æ‹¬MATLABå’ŒPython;  
+3.Receiverï¼šæŽ¥æ”¶å™¨è®¾è®¡ï¼ŒåŒ…æ‹¬SWæ¨¡åž‹è®¾è®¡ã€ADç”µè·¯è®¾è®¡å’ŒSTM32ç¨‹åºè®¾è®¡;    
+4.Transmitterï¼šå‘é€ç«¯è®¾è®¡ï¼ŒåŒ…æ‹¬ç”µè·¯è®¾è®¡å’Œç¨‹åºè®¾è®¡ã€‚    
