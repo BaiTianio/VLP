@@ -165,7 +165,25 @@ I (..\FWLIB\stm32f10x_gpio.h)(0x4D783BB4)
 I (..\FWLIB\stm32f10x_rcc.h)(0x4D783BB4)
 I (..\FWLIB\stm32f10x_usart.h)(0x4D783BB4)
 I (..\FWLIB\misc.h)(0x4D783BB4)
-F (..\User\main.c)(0x5CE69A23)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
+F (..\User\stm32f10x_it.c)(0x5D592C5A)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\stm32f10x_it.o --omf_browse ..\output\stm32f10x_it.crf --depend ..\output\stm32f10x_it.d)
+I (..\User\stm32f10x_it.h)(0x5CDFEACF)
+I (..\CMSIS\stm32f10x.h)(0x4D783CB4)
+I (..\CMSIS\core_cm3.h)(0x4D523B58)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
+I (..\CMSIS\system_stm32f10x.h)(0x4D783CAA)
+I (..\User\stm32f10x_conf.h)(0x5CD53D31)
+I (..\FWLIB\stm32f10x_adc.h)(0x4D783BB4)
+I (..\FWLIB\stm32f10x_dma.h)(0x4D783BB4)
+I (..\FWLIB\stm32f10x_exti.h)(0x4D783BB4)
+I (..\FWLIB\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\FWLIB\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\FWLIB\stm32f10x_usart.h)(0x4D783BB4)
+I (..\FWLIB\misc.h)(0x4D783BB4)
+I (..\SYSTEM\delay.h)(0x5BEB91CF)
+I (..\SYSTEM\sys.h)(0x5C8B5B31)
+I (..\SYSTEM\usart.h)(0x5C8B56BE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
+F (..\User\main.c)(0x5D5937BA)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
 I (..\SYSTEM\sys.h)(0x5C8B5B31)
 I (..\CMSIS\stm32f10x.h)(0x4D783CB4)
 I (..\CMSIS\core_cm3.h)(0x4D523B58)
@@ -184,27 +202,8 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
 I (..\SYSTEM\delay.h)(0x5BEB91CF)
 I (..\HardWare\ADC\adc.h)(0x5055357C)
 I (..\HardWare\GPIO\gpio.h)(0x5C90A2CA)
-I (..\SYSTEM\dma.h)(0x5BC47F6B)
 I (..\HardWare\EXTI\exti.h)(0x5CD54A57)
-F (..\User\stm32f10x_it.c)(0x5CE40279)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\stm32f10x_it.o --omf_browse ..\output\stm32f10x_it.crf --depend ..\output\stm32f10x_it.d)
-I (..\User\stm32f10x_it.h)(0x5CDFEACF)
-I (..\CMSIS\stm32f10x.h)(0x4D783CB4)
-I (..\CMSIS\core_cm3.h)(0x4D523B58)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
-I (..\CMSIS\system_stm32f10x.h)(0x4D783CAA)
-I (..\User\stm32f10x_conf.h)(0x5CD53D31)
-I (..\FWLIB\stm32f10x_adc.h)(0x4D783BB4)
-I (..\FWLIB\stm32f10x_dma.h)(0x4D783BB4)
-I (..\FWLIB\stm32f10x_exti.h)(0x4D783BB4)
-I (..\FWLIB\stm32f10x_gpio.h)(0x4D783BB4)
-I (..\FWLIB\stm32f10x_rcc.h)(0x4D783BB4)
-I (..\FWLIB\stm32f10x_usart.h)(0x4D783BB4)
-I (..\FWLIB\misc.h)(0x4D783BB4)
-I (..\SYSTEM\delay.h)(0x5BEB91CF)
-I (..\SYSTEM\sys.h)(0x5C8B5B31)
-I (..\SYSTEM\usart.h)(0x5C8B56BE)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599EDB3C)
-F (..\HardWare\ADC\adc.c)(0x5C9B1E52)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\adc.o --omf_browse ..\output\adc.crf --depend ..\output\adc.d)
+F (..\HardWare\ADC\adc.c)(0x5D5917E7)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB -I ..\SYSTEM -I ..\User -I ..\HardWare\ADC -I ..\HardWare\GPIO -I ..\HardWare\EXTI-I.\RTE\_RotateVLP-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\output\adc.o --omf_browse ..\output\adc.crf --depend ..\output\adc.d)
 I (..\HardWare\ADC\adc.h)(0x5055357C)
 I (..\SYSTEM\sys.h)(0x5C8B5B31)
 I (..\CMSIS\stm32f10x.h)(0x4D783CB4)

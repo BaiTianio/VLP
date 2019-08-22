@@ -18,5 +18,4 @@
 ..\output\main.o: ..\SYSTEM\delay.h
 ..\output\main.o: ..\HardWare\ADC\adc.h
 ..\output\main.o: ..\HardWare\GPIO\gpio.h
-..\output\main.o: ..\SYSTEM\dma.h
 ..\output\main.o: ..\HardWare\EXTI\exti.h

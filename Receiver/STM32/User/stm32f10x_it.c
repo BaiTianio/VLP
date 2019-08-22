@@ -152,7 +152,7 @@ void EXTI15_10_IRQHandler(void)
 {
 	//int temp=0;
 	//int i=0;
-	DMA_Cmd(DMA1_Channel4,DISABLE);
+	//DMA_Cmd(DMA1_Channel4,DISABLE);
 	if(EXTI_GetITStatus(EXTI_Line12)&& GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)==1)
 	{
 		EXTI->IMR &=~(EXTI_Line12);//屏蔽外部中断
@@ -162,18 +162,9 @@ void EXTI15_10_IRQHandler(void)
 			USART1->DR = (u8)0xFF;     
 		}		
 	while(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)==1)
-		delay_ms(1);
-//	while(temp<10)
-//	{	
-//		temp=0;
-//		for(i=0;i<10;i++)
-//			{
-//				if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)==0)
-//					temp++;
-//			}
-//	}	
+		delay_us(100);
 	EXTI_ClearITPendingBit(EXTI_Line12); //清除LINE0上的中断标志位
-	DMA_Cmd(DMA1_Channel4,ENABLE);
+	//DMA_Cmd(DMA1_Channel4,ENABLE);
 }
 
 /**

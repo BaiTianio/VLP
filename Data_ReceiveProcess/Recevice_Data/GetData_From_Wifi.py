@@ -11,9 +11,9 @@ def get_wifi_data():
     BUFSIZ = 2048  #接收数据缓冲大小
     ADDR = (HOST, PORT)
     tcpSerSock = socket(AF_INET, SOCK_STREAM) #创建TCP服务器套接字
+    tcpSerSock.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)
     tcpSerSock.bind(ADDR)  #套接字与地址绑定
     tcpSerSock.listen(1) #监听连接，同时连接请求的最大数目
-    
     
     receive_flag=0
     stroge_data=0
