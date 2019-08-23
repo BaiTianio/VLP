@@ -7,11 +7,11 @@ import numpy as np
 
 
 from GetData_From_Wifi     import get_wifi_data
-from ArrangeData           import data_arrange
-from DataInterpolate_Draw  import d2Cubic_interpol,draw_3d
-from Positioning           import find_Extreme,FindAll_ExtremePoint
+#from ArrangeData           import data_arrange
+#from DataInterpolate_Draw  import d2Cubic_interpol,draw_3d
+#from Positioning           import find_Extreme,FindAll_ExtremePoint
 #import time
-import os
+#import os
 
 #获取数据
 #i=0
@@ -23,14 +23,15 @@ import os
 #    time.sleep(10)
 #raw_data=np.load(os.getcwd()+"\\raw_data\\data_%d.npy"%4)
 
-load_path=r"C:\Users\abc47\Desktop\VLP\RotateVLP\data\\"
+#load_path=r"C:\Users\abc47\Desktop\VLP\RotateVLP\data\\"
 
-arranged_data=np.load(load_path+"data_44_1.npy")
-
-#raw_data=get_wifi_data() 
-#np.save("raw_data.npy",raw_data)
+#arranged_data=np.load(load_path+"data_44_1.npy")
+angle=79
+for times in range(5):
+    raw_data=get_wifi_data() 
+    np.save("data_"+str(angle)+"_"+str(times)+".npy",raw_data)
 #arranged_data=data_arrange(raw_data)
-draw_3d(arranged_data)
+#draw_3d(arranged_data)
 #d2Cubic_interpol_data=d2Cubic_interpol(arranged_data)
 #draw_3d(d2Cubic_interpol_data)
 #

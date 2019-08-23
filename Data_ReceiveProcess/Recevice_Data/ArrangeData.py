@@ -9,39 +9,39 @@ import numpy as np
 #from scipy.fftpack import fft,ifft
 #from scipy import signal
 
-#数据整理函数
+#脢媒戮脻脮没脌铆潞炉脢媒
 #data_in=np.load("raw_data.npy")
 
-def data_arrange(data_in):
+def data_arrange_1(data_in):
         
-    #寻找数据的帧头
+    #脩掳脮脪脢媒戮脻碌脛脰隆脥路
     for i in range(len(data_in)-27):
         if( data_in[i]==0     and data_in[i+9]==1  and 
             data_in[i+18]==2  and data_in[i+27]==3 ):
             data_in=data_in[i:]
-            row_num=len(data_in)%9#保证向量可以排成n行9列的形式
+            row_num=len(data_in)%9#卤拢脰陇脧貌脕驴驴脡脪脭脜脜鲁脡n脨脨9脕脨碌脛脨脦脢陆
             find_data=data_in[0:len(data_in)-row_num]
             data_storge=find_data.reshape(int(len(find_data)/9),9)
             break
      
-     #检查帧头据中是否会出现错误   
+     #录矛虏茅脰隆脥路戮脻脰脨脢脟路帽禄谩鲁枚脧脰麓铆脦贸   
     for x in data_storge[:,0]:
         if(x>7):
-            raise Exception("数据整理出错")
+            raise Exception("arrange error")
      
-    ##---------------数据相加得到最终数值---------------------------   
+    ##---------------脢媒戮脻脧脿录脫碌脙碌陆脳卯脰脮脢媒脰碌---------------------------   
     calculate_data=np.c_[data_storge[:,0],data_storge[:,1]*256+data_storge[:,2]]
     calculate_data=np.c_[calculate_data,data_storge[:,3]*256+data_storge[:,4]]
     calculate_data=np.c_[calculate_data,data_storge[:,5]*256+data_storge[:,6]]
     calculate_data=np.c_[calculate_data,data_storge[:,7]*256+data_storge[:,8]]
-    
-    #    np.save("raw_data.npy",calculate_data)
-    
-    #确定完整的帧数，将所有数据中每个PD的数据抽取出来，将一组PD的数据保存为一个group并返回
+    return calculate_data    
+        #    np.save("raw_data.npy",calculate_data)
+def data_arrange_2(data_in):    
+    #脠路露篓脥锚脮没碌脛脰隆脢媒拢卢陆芦脣霉脫脨脢媒戮脻脰脨脙驴赂枚PD碌脛脢媒戮脻鲁茅脠隆鲁枚脌麓拢卢陆芦脪禄脳茅PD碌脛脢媒戮脻卤拢麓忙脦陋脪禄赂枚group虏垄路碌禄脴
     def data_divide_group(data_in,group_num):  
         row_num=int(data_in.shape[0]/8)
         PDarray_data=np.zeros((row_num,8))
-        #将所有数据按照PD阵列进行分组
+        #陆芦脣霉脫脨脢媒戮脻掳麓脮脮PD脮贸脕脨陆酶脨脨路脰脳茅
         for i in range(row_num):  
             if(data_in[i*8,0]==0 and data_in[i*8+7,0]==7):
                 PDarray_data[i,:]=data_in[i*8:(i+1)*8,group_num].T  
@@ -50,18 +50,18 @@ def data_arrange(data_in):
                                 PDarray_data[:,4],PDarray_data[:,5],PDarray_data[:,6],PDarray_data[:,7]]
         return PDarrayGroup_data
     
-    #正确角度排列应为CBAD（3214） 
-    PDarrayA_DataGroup=data_divide_group(calculate_data,3)#起始位置0
-    PDarrayB_DataGroup=data_divide_group(calculate_data,2)#起始位置-1/4
-    PDarrayC_DataGroup=data_divide_group(calculate_data,1)#起始位置-2/4
-    PDarrayD_DataGroup=data_divide_group(calculate_data,4)#起始位置-3/4
+    #脮媒脠路陆脟露脠脜脜脕脨脫娄脦陋CBAD拢篓3214拢漏 
+    PDarrayA_DataGroup=data_divide_group(calculate_data,3)#脝冒脢录脦禄脰脙0
+    PDarrayB_DataGroup=data_divide_group(calculate_data,2)#脝冒脢录脦禄脰脙-1/4
+    PDarrayC_DataGroup=data_divide_group(calculate_data,1)#脝冒脢录脦禄脰脙-2/4
+    PDarrayD_DataGroup=data_divide_group(calculate_data,4)#脝冒脢录脦禄脰脙-3/4
     
-    PDarrayB_DataGroup=np.roll(PDarrayB_DataGroup,int(PDarrayB_DataGroup.shape[0]*3/4),axis=0)#将B组数据循环右移3/4,相当于循环左移1/4
-    PDarrayC_DataGroup=np.roll(PDarrayC_DataGroup,int(PDarrayC_DataGroup.shape[0]*2/4),axis=0)#将C组数据循环右移2/4，相当于循环左移2/4
-    PDarrayD_DataGroup=np.roll(PDarrayD_DataGroup,int(PDarrayD_DataGroup.shape[0]*1/4),axis=0)#将C组数据循环右移1/4，相当于循环左移3/4
+    PDarrayB_DataGroup=np.roll(PDarrayB_DataGroup,int(PDarrayB_DataGroup.shape[0]*3/4),axis=0)#陆芦B脳茅脢媒戮脻脩颅禄路脫脪脪脝3/4,脧脿碌卤脫脷脩颅禄路脳贸脪脝1/4
+    PDarrayC_DataGroup=np.roll(PDarrayC_DataGroup,int(PDarrayC_DataGroup.shape[0]*2/4),axis=0)#陆芦C脳茅脢媒戮脻脩颅禄路脫脪脪脝2/4拢卢脧脿碌卤脫脷脩颅禄路脳贸脪脝2/4
+    PDarrayD_DataGroup=np.roll(PDarrayD_DataGroup,int(PDarrayD_DataGroup.shape[0]*1/4),axis=0)#陆芦C脳茅脢媒戮脻脩颅禄路脫脪脪脝1/4拢卢脧脿碌卤脫脷脩颅禄路脳贸脪脝3/4
     
     
-    #数据穿插整合
+    #脢媒戮脻麓漏虏氓脮没潞脧
     row_num=np.max([PDarrayA_DataGroup.shape[0],PDarrayB_DataGroup.shape[0],
                    PDarrayC_DataGroup.shape[0],PDarrayD_DataGroup.shape[0]])
     data_summary=np.zeros((row_num,32))
@@ -74,7 +74,7 @@ def data_arrange(data_in):
     
     
 #
-##数组长度的问题，在分割时可能产生不等长的分隔段，因此取所有分隔段的最小长度     
+##脢媒脳茅鲁陇露脠碌脛脦脢脤芒拢卢脭脷路脰赂卯脢卤驴脡脛脺虏煤脡煤虏禄碌脠鲁陇碌脛路脰赂么露脦拢卢脪貌麓脣脠隆脣霉脫脨路脰赂么露脦碌脛脳卯脨隆鲁陇露脠     
 #row_num_temp=np.min([PDarray1_DataGroup[0].shape[0],PDarray1_DataGroup[1].shape[0],
 #                     PDarray1_DataGroup[2].shape[0],PDarray1_DataGroup[3].shape[0]])
 #
@@ -99,17 +99,17 @@ def data_arrange(data_in):
 #    fig=plt.figure()    
 #    data_lengh=len(data_in)
 #    x=np.arange(data_lengh)
-#    yy=fft(data_in)               #快速傅里叶变换   
-#    yf=abs(yy)                 # 取模    
+#    yy=fft(data_in)               #驴矛脣脵赂碌脌茂脪露卤盲禄禄   
+#    yf=abs(yy)                 # 脠隆脛拢    
 #   
-#    #原始波形
+#    #脭颅脢录虏篓脨脦
 #    plt.subplot(211)
 #    plt.plot(x,data_in)
 #    plt.title('Original wave')
-#    #FFT（双边频率范围）
+#    #FFT拢篓脣芦卤脽脝碌脗脢路露脦搂拢漏
 #    plt.subplot(212)
-#    plt.plot(x,yf,'r') #显示原始信号的FFT模值
-#    plt.title('FFT(two sides frequency range)',fontsize=7,color='#7A378B')  #注意这里的颜色可以查询颜色代码表
+#    plt.plot(x,yf,'r') #脧脭脢戮脭颅脢录脨脜潞脜碌脛FFT脛拢脰碌
+#    plt.title('FFT(two sides frequency range)',fontsize=7,color='#7A378B')  #脳垄脪芒脮芒脌茂碌脛脩脮脡芦驴脡脪脭虏茅脩炉脩脮脡芦麓煤脗毛卤铆
 #    plt.show()
 #
 ##
@@ -123,10 +123,10 @@ def data_arrange(data_in):
 #plt.plot(PDarrayD_DataGroup_rolled)
 #plt.tight_layout()
 #plt.draw()
-##采样频率为1000hz,信号本身最大的频率为500hz，要滤除10hz以上频率成分，即截至频率为10hz，则wn=2*10/1000=0.02
+##虏脡脩霉脝碌脗脢脦陋1000hz,脨脜潞脜卤戮脡铆脳卯麓贸碌脛脝碌脗脢脦陋500hz拢卢脪陋脗脣鲁媒10hz脪脭脡脧脝碌脗脢鲁脡路脰拢卢录麓陆脴脰脕脝碌脗脢脦陋10hz拢卢脭貌wn=2*10/1000=0.02
 #def lowpass_filter(data_in):
 #    b, a = signal.butter(8, 0.02, 'lowpass')  
-#    return signal.filtfilt(b, a, data_in)       #data为要过滤的信号
+#    return signal.filtfilt(b, a, data_in)       #data脦陋脪陋鹿媒脗脣碌脛脨脜潞脜
     
 #filted_data=lowpass_filter(PDarrayB_DataGroup[:,3])    
 #fft_draw(filted_data)
