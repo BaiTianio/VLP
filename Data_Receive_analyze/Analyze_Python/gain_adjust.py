@@ -1,18 +1,18 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 import re
 import os
 
-def read_data(angle):
-    path="../Data/data_csv/"
-    file_list=os.listdir(path)
-    csv_list=list(filter(lambda x:(x[-4:]==".csv" and x[5:7]==str(angle)),file_list))
-    data=[0,0,0]
-    for i in range(len(csv_list)):
-        data[i]=np.array(pd.read_csv(path+csv_list[i]))  
-    return data
+def load_AllFile():
+    load_path="../Data/2019_8_23/npy_arranged/"
+    FileList=list(filter(lambda x:(x[-4:]==".npy"),os.listdir(load_path)))
+    for file in FileList:
+        var_name=file[0:-4]
+        exec(var_name+'=np.load(load_path+file)',locals(),globals())
+    return 0
+load_AllFile()
 
 def column_max(in_data):
     max_num=np.int64([])    
@@ -21,7 +21,7 @@ def column_max(in_data):
     return max_num
 
 def plot_8PD(angle,time):
-    data=read_data(angle)[time]
+    exec("data=data_{}_{}".format(angle,time),globals())
     index=np.arange(8)*4
     for i in range(4):
         max_num=column_max(data[:,index+i])
@@ -36,10 +36,12 @@ def plot_32PD(angle):
     plt.title("angle={}".format(angle))    
     plt.legend()
  
-#%%   
-angle=62 
-sns.set(style="whitegrid")
+
+#%%
+plt.style.use("seaborn-poster")    
+angle=65 
+
 fig1=plt.figure()    
 plot_8PD(angle,1)
-fig2=plt.figure()
-plot_32PD(angle)
+#fig2=plt.figure()
+#plot_32PD(angle)
