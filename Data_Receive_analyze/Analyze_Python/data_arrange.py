@@ -54,7 +54,7 @@ for file in Req_FileList:
     var_name=file[0:-4]
     locals()[var_name]=np.load(load_path+file)
     locals()[var_name]=arrange_data(locals()[var_name])
-    np.save(save_npy_path+str(var_name)+'.npy',locals()[var_name])
+#    np.save(save_npy_path+str(var_name)+'.npy',locals()[var_name])
 #    locals()[var_name+'_df']=pd.DataFrame(locals()[var_name])
 #    locals()[var_name+'_df'].to_csv(save_csv_path+var_name+'.csv')
     
