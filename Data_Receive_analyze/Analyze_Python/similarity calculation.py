@@ -38,6 +38,8 @@ def Cos_similarityCalcula(x,y):#相似度判断
 angle=10
 plt.figure()
 plt.style.use("seaborn-poster")   
+plt.xlabel("PD number")
+plt.ylabel("Similarity")
 Eu_similarity=np.zeros(33)
 for i in range(33):
     Eu_similarity[i]=Eucledian_similarityCalcula(PD_data[angle,:],PD_data[i,:])
@@ -48,6 +50,8 @@ plt.plot(Eu_similarity)
 angle=10
 plt.figure()
 plt.style.use("seaborn-poster")
+plt.xlabel("PD number")
+plt.ylabel("Similarity")
 Cos_similarity=np.zeros(33)
 for i in range(33):
     Cos_similarity[i]=Cos_similarityCalcula(PD_data[angle,:],PD_data[i,:])
