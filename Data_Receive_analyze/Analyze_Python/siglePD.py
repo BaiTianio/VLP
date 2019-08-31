@@ -10,6 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 import os
+import math
 def load_AllFile():
     load_path="../Data/2019_8_23/npy_arranged/"
     FileList=list(filter(lambda x:(x[-4:]==".npy"),os.listdir(load_path)))
@@ -71,26 +72,54 @@ def devide_data_AllPD():
 #    plt.legend()
 #    plt.savefig("../Data/2019_8_23/picture/siglePD_15_79/"+str(PD_num)+".jpg")
 #    plt.close()
-
+def normal(mean,x = np.arange(33),sigma=2):#高斯函数 
+    y=np.exp(-1*((x-mean)**2)/(2*(sigma**2)))/(math.sqrt(2*np.pi) * sigma)
+    y=y+0.1*y.max()
+    y=y/y.max()
+    return y
 #%%
 
-PD_num=20    
-PD_data_1=find_siglePDmax_allData(PD_num,1)
-PD_data_2=find_siglePDmax_allData(PD_num,2)
-PD_data_3=find_siglePDmax_allData(PD_num,3)
-#
-x=np.arange(15,80,2)
-plt.style.use("seaborn-poster")    
-fig1=plt.figure()
-plt.title("PD="+str(PD_num))
-plt.plot(x,PD_data_1,label='Times=1')
-plt.plot(x,PD_data_2,label='Times=2')
-plt.plot(x,PD_data_3,label='Times=3')
-plt.ylim((0,1500))
-plt.xlim(10,80)
-plt.xticks(np.arange(10,80,1),fontsize=6)
-plt.grid(axis='x',linestyle='-.')
-plt.legend()
+def data2draw(PD_num):
+    x=np.arange(15,80,2)
+    PD_data_1=find_siglePDmax_allData(PD_num,1)
+    PD_data_2=find_siglePDmax_allData(PD_num,2)
+    PD_data_3=find_siglePDmax_allData(PD_num,3)
+    #
+    ideal_data=np.zeros([33,33])
+    for i in range(33):
+        ideal_data[:,i]=normal(mean=i)
+    oneangel=ideal_data[PD_num,:]*PD_data_1.max() 
+    
+    plt.plot(x,PD_data_1,label='real value times=1')
+    plt.plot(x,PD_data_2,label='real value times=2')
+    plt.plot(x,PD_data_3,label='real value times=3')
+    #图形设置
+    plt.plot(x,oneangel,label='ideal value')
+    plt.title("PD="+str(PD_num))
+    plt.grid(axis='x',linestyle='-.')
+    plt.ylim((0,1500))
+    plt.xlim(10,80)
+    plt.xlabel("AOA俯仰角($\degree$)")
+    plt.ylabel("光照度(lux)")
+    plt.xticks(np.arange(10,80,1),fontsize=6)
+    plt.legend()
+
+
+plt.style.use("seaborn-paper") 
+fig=plt.figure(dpi=300,figsize=(8,8))
+plt.subplot(311)
+data2draw(16)
+plt.subplot(312)
+data2draw(17)
+plt.subplot(313)
+data2draw(18)
+fig.tight_layout()#调整整体空白
+plt.subplots_adjust(wspace =0, hspace =0.4)
+plt.savefig('./temp.png')
+plt.close()
+
+   
+
 
 
 
