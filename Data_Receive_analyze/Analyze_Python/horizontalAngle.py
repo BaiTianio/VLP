@@ -25,11 +25,13 @@ def column_maxposi(in_data):
     for i in range(in_data.shape[1]):
         max_loc=np.append(max_loc,np.argmax(in_data[:,i]))    
     return max_loc
-
-data=read_data(27)[2]
-
-plt.style.use("seaborn-paper")
-for PD_num in np.arange(1,data.shape[1]):
-    plt.plot(data[:,PD_num],label='PD='+str(PD_num))
-plt.legend()    
+for angle in range(15,79,2):
+    plt.figure()
+    data=read_data(angle)[0]
+    plt.style.use("seaborn-paper")
+    for PD_num in np.arange(1,data.shape[1]):
+        plt.plot(data[:,PD_num],label='PD='+str(PD_num))
+    plt.legend()
+    plt.savefig("./picture/angle{}.png".format(angle))
+    plt.close()    
 
