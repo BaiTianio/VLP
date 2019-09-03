@@ -1,3 +1,5 @@
+
+#根据不同的数据特征来调整增益
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

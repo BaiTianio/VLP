@@ -6,37 +6,11 @@ import re
 import os
 import tkinter as tk
 from tkinter import filedialog
+
+
 #%%
-def load_AllFile(data_form,*args):
-    try:
-        if(args[0]==1):
-            root=tk.Tk()
-            root.withdraw()
-            newpath=filedialog.askdirectory()
-            with open("./数据保存文件夹地址.txt",'w+') as path_file:
-                load_path=path_file.write(newpath)
-                
-        with open("./数据保存文件夹地址.txt",'r+') as path_file:
-            load_path=path_file.read()
-#            print(load_path)  
-        FileList=list(filter(lambda x:(x[-4:]==data_form),os.listdir(load_path)))
-        if(data_form=='.csv'):
-            for file in FileList:
-                var_name=file[0:-4]
-                globals()[var_name]=np.array(pd.read_csv(load_path+'/'+file))#加载测量数据
-        elif(data_form=='.npy'):
-            for file in FileList:
-                var_name=file[0:-4]
-                globals()[var_name]=np.load(load_path+'/'+file)#加载测量数据
-        return 0
-    except(FileNotFoundError):
-        root=tk.Tk()
-        root.withdraw()
-        newpath=filedialog.askdirectory()
-        with open("./数据保存文件夹地址.txt",'w+') as path_file:
-            load_path=path_file.write(newpath)
-            return 0
-load_AllFile('.npy',1)
+
+load_AllFile('.npy')
 #%%
 
 
