@@ -43,17 +43,14 @@ def graph_adjust(**kargs):
     if('ticks_size' in kargs):
          plt.xticks(fontsize=kargs['ticks_size'])    
          plt.yticks(fontsize=kargs['ticks_size'])    
-         
-    if('xlabel' in kargs):      
-         plt.xlabel(kargs['xlabel'],fontsize=kargs['label_size'])
-    if('ylabel' in kargs):      
-         plt.ylabel(kargs['ylabel'],fontsize=kargs['label_size'])
     return 0
 
-def font_config():
+def font_config(**kargs):
+    if('size' not in kargs):
+        kargs['size']=10
     font = {'family' : 'SimHei',
             'weight' : 'normal',
-            'size'   : '10'}
+            'size'   : kargs['size']}
     plt.rc('font', **font)               # 步骤一（设置字体的更多属性）
     plt.rc('axes', unicode_minus=False)  # 步骤二（解决坐标轴负数的负号显示问题）  
     return 0

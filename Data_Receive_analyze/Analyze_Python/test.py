@@ -1,15 +1,22 @@
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
-# Read data from a csv
+import os
+import tkinter as tk
+from tkinter import filedialog
 
-#z_data = pd.dataframe(r'C:\Users\abc47\Desktop\VLP\RotateVLP\Data_Receive_analyze\Data\2019_8_23\csv_arranged\data_15_1.csv')
-z_data=np.array([[0,1,2],[0,1,2],[0,1,2]])
-fig = go.Figure(data=[go.Surface(z=z_data)])
-
-fig.update_layout(title='Mt Bruno Elevation', autosize=False,
-                  width=1000, height=1000,
-                  margin=dict(l=65, r=50, b=65, t=90))
-
-#fig.write_image(file='fig1.png',format="png", width=600, height=350, scale=10)
-fig.write_html('first_figure.html', auto_open=True)
+try:
+    with open("./数据保存文件夹地址.txt",'r') as path_file:
+        load_path=path_file.read()
+        print(load_path)  
+    FileList=list(filter(lambda x:(x[-4:]==".csv"),os.listdir(load_path)))
+    for file in FileList:
+        var_name=file[0:-4]
+        globals()[var_name]=pd.read_csv(load_path+'/'+file)#加载测量数据
+        
+except(FileNotFoundError):
+    root=tk.Tk()
+    root.withdraw()
+    newpath=filedialog.askdirectory()
+    with open("./数据保存文件夹地址.txt",'w') as path_file:
+        load_path=path_file.write(newpath)
