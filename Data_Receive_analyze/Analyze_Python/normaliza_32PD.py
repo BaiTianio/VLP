@@ -8,26 +8,6 @@ import tkinter as tk
 from tkinter import filedialog
 
 
-#%%
-
-load_AllFile('.npy')
-#%%
-
-
-def load_AllFile():
-    PD_data=np.zeros([3,33,32])
-    load_path=r"../../Data/2019_8_23/npy_singlePD_data/"
-    FileList=list(filter(lambda x:(x[-4:]==".npy"),os.listdir(load_path)))
-    for file in FileList:
-        var_name=file[0:-4]
-        locals()[var_name]=np.load(load_path+file)#加载一次测量数据
-        locals()[var_name]=locals()[var_name]/locals()[var_name].max()
-    for times in range(3):#三次采集数据全部取出
-        for PD_num in range(32):
-            var_name="pd{}_{}".format(PD_num,times+1)
-            PD_data[times,:,PD_num]=locals()[var_name]
-    return PD_data
-PD_data=load_AllFile()
 
         
 def column_max(in_data):
@@ -47,11 +27,6 @@ def plot_32PD(angle):#通过signlePD数据来画图
         plt.legend()
     return 0
 
-def normal(mean,x = np.arange(33),sigma=2):#高斯函数 
-    y=np.exp(-1*((x-mean)**2)/(2*(sigma**2)))/(math.sqrt(2*np.pi) * sigma)
-    y=y+0.1*y.max()
-    y=y/y.max()
-    return y
 
 
 #%%

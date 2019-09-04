@@ -3,79 +3,48 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import math
-import re
-import os
+from scipy.stats import norm
 
-def load_AllFile():
-    PD_data=np.zeros([33,32])
-    load_path="../Data/2019_8_23/npy_singlePD_data/"
-    FileList=list(filter(lambda x:(x[-4:]==".npy"),os.listdir(load_path)))
-    for file in FileList:
-        var_name=file[0:-4]
-        locals()[var_name]=np.load(load_path+file)#加载一次测量数据
-        locals()[var_name]=locals()[var_name]/locals()[var_name].max()
-    for times in range(1,4):#三次采集数据全部取出
-        for i in range(32):
-            var_name="pd"+str(i)+"_1"
-            PD_data[:,i]=locals()[var_name]
-            return PD_data
+from func_pack import load_data,data_Process
 
-PD_data=load_AllFile()
-
-def column_max(in_data):
-    max_num=np.int64([])    
-    for i in range(in_data.shape[1]):
-        max_num=np.append(max_num,np.max(in_data[:,i]))    
-    return max_num
-
-def plot_8PD(angle,time):
-    exec("data=data_{}_{}".format(angle,time),globals())
-    index=np.arange(8)*4
-    for i in range(4):
-        max_num=column_max(data[:,index+i])
-        plt.plot(max_num,label='PDarray='+str(i))
-    plt.title("angle={}".format(angle))  
-    plt.legend()
-#        plt.ylim(100,180)
-def plot_32PD_V1(angle):#通过arrange数据来画图
-    for i in range(1,4):
-        vari_name='data_{}_{}'.format(angle,i)
-        data=globals()[vari_name]
-        plt.plot(column_max(data),label='times='+str(i))  
-    plt.title("angle={}".format(angle))    
-    plt.legend()
-
-def plot_32PD_V2(angle):#通过signlePD数据来画图
-    for i in range(1,4):
-        vari_name='data_{}_{}'.format(angle,i)
-        data=globals()[vari_name]
-        plt.plot(column_max(data),label='times='+str(i))  
-    plt.title("angle={}".format(angle))    
-    plt.legend()
+#定义每个PD的增益调整系数
+gain_coeff=(964,1246,1136,1018,1350,1523,1371,1770,2063,1420,1346,1310,1253,1158,1181,1271,997,879,1014,
+1102,1136,933,952,936,838,928,927,842,880,918,967,777)
 
 
-def normal(mean,x = np.arange(33),sigma=2):#高斯函数 
-    y=np.exp(-1*((x-mean)**2)/(2*(sigma**2)))/(math.sqrt(2*np.pi) * sigma)
-    y=y+0.1*y.max()
-    y=y/y.max()
-    return y
+
+if('all_data' not in globals()):
+    load_data=load_data()
+    all_data=load_data.load_AllData()
+
+#对每个AOA角数据进行归一化    
+data_ColumnMax={}
+for index in all_data.keys(): 
+    data_ColumnMax[index]=data_Process.column_MaxValue(all_data[index][:,2:])
+
+for index in data_ColumnMax.keys():
+    data_ColumnMax[index]/=data_ColumnMax[index].max()
+
+PD_AllAngle={}
+for PD_num in range(0,32):
+    PD_AllAngle['PD'+str(PD_num)]=data_Process.selectedPD_Data(PD_num,data_ColumnMax)
 
 
-#%%
-fig=plt.figure()
-plt.style.use("seaborn-paper") 
-font = {'family' : 'SimHei',
-        'weight' : 'bold',
-        'size'   : '16'}
-plt.rc('font', **font)               # 步骤一（设置字体的更多属性）
-plt.rc('axes', unicode_minus=False)  # 步骤二（解决坐标轴负数的负号显示问题）   
-angle=33
 
-plt.xlabel("PD 序号")
-plt.ylabel("光照度(lux)") 
-ideal_data=np.zeros([33,33])
-   
-plot_32PD(angle)
-#fig2=plt.figure()
-#plot_32PD(angle)
+
+##求所有数据中，每个PD的最大值
+#PD_max={}
+#for PD_num in range(1,33):
+#    signlePD_data=data_Process.selectedPD_Data(PD_num,all_data)
+#    temp=np.array([])
+#    for data in signlePD_data.values():
+#        temp=np.append(temp,data[np.argpartition(data,len(data)-100)[-100:]])
+#        PD_max[PD_num]=temp[np.argpartition(temp,len(temp)-100)[-100:]].mean()
+# 
+    
+##输出保存增益调整后的数据      
+#save_path="C:/Users/abc47/Desktop/VLP\RotateVLP/Data_Receive_analyze/Data/2019_8_23/增益调整后的数据/"
+#for index in all_data.keys():
+#    for PD_num in range(1,33):
+#        all_data[index][:,PD_num]/=gain_coeff[PD_num-1]
+#    pd.DataFrame(all_data[index]).to_csv(save_path+index+'.csv')

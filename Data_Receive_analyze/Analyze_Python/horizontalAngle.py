@@ -41,11 +41,6 @@ def load_AllFile():
 load_AllFile()
 #%%
 
-def column_maxposi(in_data):
-    max_loc=np.int64([])    
-    for i in range(in_data.shape[1]):
-        max_loc=np.append(max_loc,np.argmax(in_data[:,i]))    
-    return max_loc
 def draw_32PD(angles,save_path):
     plt.style.use("seaborn-paper")
     print(save_path)

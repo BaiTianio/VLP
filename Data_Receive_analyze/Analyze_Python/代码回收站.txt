@@ -1,0 +1,16 @@
+
+#求所有数据中，每个PD的最大值
+PD_max={}
+for PD_num in range(1,33):
+    signlePD_data=data_Process.selectedPD_Data(PD_num,all_data)
+    temp=np.array([])
+    for data in signlePD_data.values():
+        temp=np.append(temp,data[np.argpartition(data,len(data)-100)[-100:]])
+        PD_max[PD_num]=temp[np.argpartition(temp,len(temp)-100)[-100:]].mean()
+  
+输出保存增益调整后的数据      
+#save_path="C:/Users/abc47/Desktop/VLP\RotateVLP/Data_Receive_analyze/Data/2019_8_23/增益调整后的数据/"
+#for index in all_data.keys():
+#    for PD_num in range(1,33):
+#        all_data[index][:,PD_num]/=gain_coeff[PD_num-1]
+#    pd.DataFrame(all_data[index]).to_csv(save_path+index+'.csv')
