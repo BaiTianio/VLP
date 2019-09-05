@@ -75,7 +75,7 @@ class load_data():#用于加载数据
 
 #数据处理常用的函数        
 class data_Process:
-    
+
     @staticmethod
     def column_MaxValue(in_data):
         max_num=np.array([])    
@@ -92,16 +92,24 @@ class data_Process:
     
 #从数据中抽取指定的一列，一维二维都可以   
     @staticmethod
-    def selectedPD_Data(PD_num,all_data):
+    def selectedPD_Data(PD_num,in_data):
         PD_data={}
-        if(len(list(all_data.values())[0].shape)>1):
-            for index in all_data.keys():
-                PD_data[index]=all_data[index][:,PD_num]
+        if(len(list(in_data.values())[0].shape)>1):
+            for index in in_data.keys():
+                PD_data[index]=in_data[index][:,PD_num]
         else:
-            for index in all_data.keys():
-                PD_data[index]=all_data[index][PD_num]
+            for index in in_data.keys():
+                PD_data[index]=in_data[index][PD_num]
         return PD_data
-    
+    #对每个AOA角数据进行归一化
+    @staticmethod
+    def normalize(all_data):
+        data_ColumnMax={}
+        for index in all_data.keys(): 
+            data_ColumnMax[index]=data_Process.column_MaxValue(all_data[index][:,2:])
+        for index in data_ColumnMax.keys():
+            data_ColumnMax[index]/=data_ColumnMax[index].max()
+        return data_ColumnMax
 #load_inst=load_data()
 #data=load_inst.load_AllData()    
 class my_draw():
@@ -121,7 +129,6 @@ class my_draw():
              plt.xticks(np.linspace(0,x-1,len(kargs['xticks']),dtype=np.int),kargs['xticks'])
         if(kargs['yticks']):
              plt.xticks(np.linspace(0,y-1,len(kargs['yticks']),dtype=np.int),kargs['yticks'])
-
         return 0
 
     def graph_adjust(**kargs):   
@@ -146,16 +153,14 @@ class my_draw():
         plt.rc('axes', unicode_minus=False)  # 步骤二（解决坐标轴负数的负号显示问题）  
         return 0
     
-    def draw_siglePD_save(in_data,save_path):
+    def draw_siglePD_save(in_data,PD_num,save_path):
         plt.style.use("seaborn-paper")
         plt.figure(figsize=(16,10),dpi=300)
-        data=np.array(list(in_data.values()))
-        for times in range(3): 
-            index=np.arange(times:99:3)
-            plt.plot(data[])
-        plt.title(index)
+        for times in range(3):
+            plt.plot(in_data[times],label="times="+str(times+1))
+        plt.title("PD="+str(PD_num))
         plt.legend()
-        plt.savefig(save_path+"/"+index+'png')
+        plt.savefig(save_path+"/PD"+str(PD_num)+'.png')
         plt.close()   
             
 #    def draw_32PD(angles,save_path):
