@@ -41,24 +41,26 @@ def column_MaxValue(in_data):
     return max_num
 
 def draw_all_PD(data1,data2,data3):
-    for PD_num in np.arange(32):
+    plt.style.use("seaborn-poster")    
+    fig1=plt.figure()
+    for PD_num in np.arange(15,20):
         x=np.arange(15,80,2)
-        ideal_value=norm.pdf(np.arange(0,90,0.1), loc=7.5+PD_num*2.5, scale=5) #正态分布 
-        plt.style.use("seaborn-poster")    
-        fig1=plt.figure()
-        plt.title("PD="+str(PD_num))
-        plt.plot(x,data1[:,PD_num],label='Times=1')
-        plt.plot(x,data2[:,PD_num],label='Times=2')
-        plt.plot(x,data3[:,PD_num],label='Times=3')
-        plt.plot(np.arange(0,90,0.1),ideal_value/ideal_value.max(),label='ideal value')
+#        ideal_value=norm.pdf(np.arange(0,90,0.1), loc=7.5+PD_num*2.5, scale=5) #正态分布 
+#        plt.title("PD="+str(PD_num))
+        plt.plot(x,data1[:,PD_num],label='PD_'+str(PD_num)+'_1')
+        plt.plot(x,data2[:,PD_num],label='PD_'+str(PD_num)+'_2')
+        plt.plot(x,data3[:,PD_num],label='PD_'+str(PD_num)+'_3')
+#        plt.plot(np.arange(0,90,0.1),ideal_value/ideal_value.max(),label='ideal value')
         
-        plt.xlim((15,80))
-        plt.ylim((0,1))
-        plt.legend()
-        plt.xticks(np.arange(14,80,1),fontsize=6)
-        plt.grid(axis='x',linestyle='-.')
-        plt.savefig("./Picture/PD"+str(PD_num)+".jpg")
-        plt.close()     
+    plt.xlim((15,80))
+    plt.ylim((0,1))
+    plt.legend()
+    plt.xticks(np.arange(14,80,1),fontsize=6)
+    plt.yticks(np.arange(0,1,0.05),fontsize=7)
+    plt.grid(axis='both',linestyle='-.')
+    plt.savefig("./Picture/PD"+"PD15-20.jpg")
+#    plt.savefig("./Picture/PD"+str(PD_num)+".jpg")
+#    plt.close()     
 all_PDmax_1=np.zeros((33,32))
 all_PDmax_2=np.zeros((33,32))
 all_PDmax_3=np.zeros((33,32))
