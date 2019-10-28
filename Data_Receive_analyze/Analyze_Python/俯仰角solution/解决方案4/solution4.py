@@ -18,7 +18,6 @@ def func(p,x):
 #定义损失函数
 def residuals(p,x, y):
     res= y - func(p,x)
-    print(res)
     return res
 
 
@@ -40,6 +39,24 @@ pars=np.linspace(1,1,32)
 # 拟合函数
 r= leastsq(residuals, pars, args=(X, Y))[0]   # 三个参数：误差函数、函数参数列表、数据点
 
+ideal_value=range(15,80,2)
+estimated_value=np.zeros(33)
 for index_num in range(33):
-    angle=func(r,X[index_num])
-    print(angle)
+   estimated_value[index_num]=func(r,X[index_num])
+estiamted_error=estimated_value-ideal_value
+
+
+#绘图
+font = {'family' : 'SimSun',
+        'weight' : 'normal',
+        'size'   : 15}
+plt.rc('font', **font)               # 步骤一（设置字体的更多属性） 
+plt.rc('axes', unicode_minus=False)  # 步骤二（解决坐标轴负数的负号显示问题）  
+fig=plt.figure()
+plt.plot(ideal_value,estiamted_error,label="estiamted error")
+plt.plot(ideal_value,np.zeros(33))
+plt.xlabel("角度/$\degree$")
+plt.ylabel("估计误差/$\degree$")
+#plt.legend()
+
+
