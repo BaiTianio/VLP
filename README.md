@@ -1,3 +1,4 @@
+-As we know,VLP is a immature technolgy and involved not only software but hardware.that's a really complicated project. -
 # VLP（visible light positioning）
 仓库文件目录：  
 1.Document：文档 ;  
