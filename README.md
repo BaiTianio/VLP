@@ -1,3 +1,4 @@
+*As we know,VLP is a immature technolgy and involved not only software but hardware, so that's a really complicated project.In here, I just want to show my design for VLP. For others,I know this repository is diffcult to use and understand.If you can get it and interest it,you can contact me with the Issues.* 
 # VLP（visible light positioning）
 仓库文件目录：  
 1.Document：文档 ;  
