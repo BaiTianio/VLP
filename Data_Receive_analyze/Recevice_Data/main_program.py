@@ -26,10 +26,13 @@ from GetData_From_Wifi     import get_wifi_data
 #load_path=r"C:\Users\abc47\Desktop\VLP\RotateVLP\data\\"
 
 #arranged_data=np.load(load_path+"data_44_1.npy")
-angle=79
-for times in range(5):
+Pos_length=100
+Pos_angle=10
+for times in range(3):
     raw_data=get_wifi_data() 
-    np.save("data_"+str(angle)+"_"+str(times)+".npy",raw_data)
+    save_path="({},{})_{}.npy".format(Pos_length,Pos_angle,times)
+    print(save_path)
+    np.save(save_path,raw_data)
 #arranged_data=data_arrange(raw_data)
 #draw_3d(arranged_data)
 #d2Cubic_interpol_data=d2Cubic_interpol(arranged_data)

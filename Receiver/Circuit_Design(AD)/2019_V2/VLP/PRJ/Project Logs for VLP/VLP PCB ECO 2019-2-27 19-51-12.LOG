@@ -1,0 +1,4 @@
+Added Pin To Net: NetName=NetSTM1_21 Pin=STM1-21
+Added Pin To Net: NetName=NetSTM1_21 Pin=STM1-22
+Added Pin To Net: NetName=NetSTM1_21 Pin=STM1-23
+Added Net: Name=NetSTM1_21
