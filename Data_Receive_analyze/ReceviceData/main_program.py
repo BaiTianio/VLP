@@ -12,7 +12,7 @@ from GetData_From_Wifi     import get_wifi_data
 
 
 Pos_length=200
-Pos_angle=30
+Pos_angle=-20
 for times in range(3):
     raw_data=get_wifi_data() 
     save_path="../DataStroge/2020_1_13/({},{})_{}.npy".format(Pos_length,Pos_angle,times)
